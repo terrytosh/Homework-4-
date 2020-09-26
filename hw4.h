@@ -3,13 +3,13 @@
 
 #include "recursive.h"
 
-int sum(list_t list, int sum_of_list);
+int sum(list_t list);
     /* 
     // EFFECTS: returns the sum of each element in list
     //          zero if the list is empty.
     */ 
 
-int product(list_t list, int product_of_list);
+int product(list_t list);
     /* 
     // EFFECTS: returns the product of each element in list
     //          one if the list is empty.

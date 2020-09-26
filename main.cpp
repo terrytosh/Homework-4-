@@ -46,15 +46,15 @@ int main() {
   list_print(testlist);
 
   //testing sum
-  int sum1 = sum(rotated, 0);
+  int sum1 = sum(rotated);
   cout << endl << sum1 << endl;
-  int sum2 = sum(testlist, 0);
+  int sum2 = sum(testlist);
   cout << sum2 << endl; 
 
   //testing product
-  int product1 = product(rotated, 1);
-  cout << product1 << endl;
-  int product2 = product(testlist, 1);
-  cout << product2 << endl;
+  //int product1 = product(rotated);
+  //cout << product1 << endl;
+  //int product2 = product(testlist);
+  //cout << product2 << endl;
 
 }
