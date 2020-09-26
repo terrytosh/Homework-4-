@@ -57,4 +57,7 @@ int main() {
   //int product2 = product(testlist);
   //cout << product2 << endl;
 
+  list_t reversed = reverse(rotated);
+  list_print(reversed);
+
 }
