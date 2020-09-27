@@ -59,8 +59,14 @@ int main() {
 
   list_t reversed = reverse(rotated);
   list_print(reversed);
+  cout << endl;
 
   list_t appended = append(rotated, reversed);
   list_print(appended);
+  cout << endl;
+
+  list_t test = list_make();
+  list_t append2 = append(rotated, test);
+  list_print(append2);
 
 }
