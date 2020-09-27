@@ -47,12 +47,12 @@ list_t reverseHelper(list_t list, list_t output_list) {
 }
 
 list_t appendHelper(list_t first, list_t second, list_t output_list) {
-  if(list_isEmpty(second)) {
-    return output_list;
-  }
   if(!list_isEmpty(first)) {
     output_list = list_make(list_first(first), output_list);
     return appendHelper(list_rest(first), second, output_list);
+  }
+  if(list_isEmpty(second)) {
+    return output_list;
   }
   else {
     output_list = list_make(list_first(second), output_list);
