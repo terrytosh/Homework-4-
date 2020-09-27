@@ -36,9 +36,12 @@ list_t reverseHelper(list_t list, list_t output_list) {
   if(list_isEmpty(list)) {
     return output_list;
   }
-  output_list = list_make(list_first(list), list);
-  list_print(output_list);
+  output_list = list_make(list_first(list), output_list);
   return reverseHelper(list_rest(list), output_list);
+}
+
+list_t appendHelper(list_t first, list_t second, list_t output_list) {
+  return output_list;
 }
 
 int accumulate(list_t l, int (*fn)(int, int), int base) {
@@ -60,4 +63,9 @@ int product(list_t list){
 list_t reverse(list_t list) {
   list_t output_list = list_make();
   return reverseHelper(list, output_list);
+}
+
+list_t append(list_t first, list_t second) {
+  list_t output_list = list_make();
+  return appendHelper(first, second, output_list);
 }
