@@ -60,4 +60,7 @@ int main() {
   list_t reversed = reverse(rotated);
   list_print(reversed);
 
+  list_t appended = append(rotated, reversed);
+  list_print(appended);
+
 }

@@ -12,6 +12,12 @@ the product. If the list is not empty, multiply the value
 of the first element in the list to product and then
 recursively call productHelper(list minus first element, product)
 
+accumulate():
+
+reverse():
+
+append():
+
 */
 #include "recursive.h"
 #include "hw4.h"
@@ -41,7 +47,17 @@ list_t reverseHelper(list_t list, list_t output_list) {
 }
 
 list_t appendHelper(list_t first, list_t second, list_t output_list) {
-  return output_list;
+  if(list_isEmpty(second)) {
+    return output_list;
+  }
+  if(!list_isEmpty(first)) {
+    output_list = list_make(list_first(first), output_list);
+    return appendHelper(list_rest(first), second, output_list);
+  }
+  else {
+    output_list = list_make(list_first(second), output_list);
+    return appendHelper(first, list_rest(second), output_list);
+  }
 }
 
 int accumulate(list_t l, int (*fn)(int, int), int base) {
