@@ -19,13 +19,10 @@ reverse():
 append():
 
 */
-#include <iostream>
 #include "recursive.h"
 #include "hw4.h"
 
-using namespace std;
-
-int sumHelper(list_t list, int sum) {
+static int sumHelper(list_t list, int sum) {
   if(list_isEmpty(list)) {
     return sum;
   }
@@ -33,7 +30,7 @@ int sumHelper(list_t list, int sum) {
   return sumHelper(list_rest(list), sum);
 }
 
-int productHelper(list_t list, int product) {
+static int productHelper(list_t list, int product) {
   if(list_isEmpty(list)) {
     return product;
   }
@@ -41,7 +38,7 @@ int productHelper(list_t list, int product) {
   return productHelper(list_rest(list), product);
 }
 
-list_t reverseHelper(list_t list, list_t output_list) {
+static list_t reverseHelper(list_t list, list_t output_list) {
   if(list_isEmpty(list)) {
     return output_list;
   }
@@ -49,7 +46,7 @@ list_t reverseHelper(list_t list, list_t output_list) {
   return reverseHelper(list_rest(list), output_list);
 }
 
-list_t appendHelper(list_t first, list_t second, list_t output_list) {
+static list_t appendHelper(list_t first, list_t second, list_t output_list) {
   if(!list_isEmpty(first)) {
     output_list = list_make(list_first(first), output_list);
     return appendHelper(list_rest(first), second, output_list);
@@ -61,7 +58,7 @@ list_t appendHelper(list_t first, list_t second, list_t output_list) {
   return reverse(output_list);
 }
 
-list_t oddHelper(list_t list, list_t output_list) {
+static list_t oddHelper(list_t list, list_t output_list) {
   if(list_isEmpty(list)) {
     return reverse(output_list);
   }
@@ -71,7 +68,7 @@ list_t oddHelper(list_t list, list_t output_list) {
   return oddHelper(list_rest(list), output_list);
 }
 
-list_t evenHelper(list_t list, list_t output_list) {
+static list_t evenHelper(list_t list, list_t output_list) {
   if(list_isEmpty(list)) {
     return reverse(output_list);
   }
@@ -81,7 +78,7 @@ list_t evenHelper(list_t list, list_t output_list) {
   return evenHelper(list_rest(list), output_list);
 }
 
-list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
+static list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
   if(list_isEmpty(list)) {
     return reverse(output_list);
   }
@@ -131,18 +128,6 @@ list_t filter(list_t list, bool (*fn)(int)) {
   list_t output_list = list_make();
   return filterHelper(list, fn, output_list);
 }
-
-/*list_t rotateHelper(list_t list, unsigned int n, list_t output_list) {
-  if(n == 0) {
-    return list;
-  }
-  list = reverse(list_make(list_first(list), reverse(list_rest(list))));
-  n-=1;
-  cout << n << endl;
-  list_print(list);
-  cout << endl;
-  return rotateHelper(list, n, output_list);
-}*/
 
 list_t rotate(list_t list, unsigned int n) {
   if(n == 0) {
