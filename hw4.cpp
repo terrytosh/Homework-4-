@@ -19,8 +19,11 @@ reverse():
 append():
 
 */
+#include <iostream>
 #include "recursive.h"
 #include "hw4.h"
+
+using namespace std;
 
 int sumHelper(list_t list, int sum) {
   if(list_isEmpty(list)) {
@@ -78,6 +81,16 @@ list_t evenHelper(list_t list, list_t output_list) {
   return evenHelper(list_rest(list), output_list);
 }
 
+list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
+  if(list_isEmpty(list)) {
+    return reverse(output_list);
+  }
+  if(fn(list_first(list))) {
+    output_list = list_make(list_first(list), output_list);
+  }
+  return filterHelper(list_rest(list), fn, output_list);
+}
+
 int accumulate(list_t l, int (*fn)(int, int), int base) {
   if (list_isEmpty(l)) {
     return base;
@@ -114,17 +127,28 @@ list_t filter_even(list_t list) {
   return evenHelper(list, output_list);
 }
 
-list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
-  if(list_isEmpty(list)) {
-    return reverse(output_list);
-  }
-  if(fn(list_first(list))) {
-    output_list = list_make(list_first(list), output_list);
-  }
-  return filterHelper(list_rest(list), fn, output_list);
-}
-
 list_t filter(list_t list, bool (*fn)(int)) {
   list_t output_list = list_make();
   return filterHelper(list, fn, output_list);
+}
+
+/*list_t rotateHelper(list_t list, unsigned int n, list_t output_list) {
+  if(n == 0) {
+    return list;
+  }
+  list = reverse(list_make(list_first(list), reverse(list_rest(list))));
+  n-=1;
+  cout << n << endl;
+  list_print(list);
+  cout << endl;
+  return rotateHelper(list, n, output_list);
+}*/
+
+list_t rotate(list_t list, unsigned int n) {
+  if(n == 0) {
+    return list;
+  }
+  list = reverse(list_make(list_first(list), reverse(list_rest(list))));
+  n--;
+  return rotate(list, n);
 }
