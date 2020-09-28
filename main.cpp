@@ -44,16 +44,6 @@ int main() {
 
   list_print(rotated);
   list_print(testlist);
-  cout << endl;
-
-  list_t append1 = append(rotated, testlist);
-  list_print(append1);
-  cout << endl;
-
-  list_t append2 = append(testlist, rotated);
-  list_print(append2);
-  cout << endl;
-
   list_t testlist2 = list_make();
   for(int i = 0; i < 4; i++) {
     testlist2 = list_make(i, testlist2);
@@ -61,12 +51,8 @@ int main() {
   list_print(testlist2);
   cout << endl;
 
-  list_t append3 = append(rotated, testlist2);
-  list_print(append3);
-  cout << endl;
-
-  list_t append4 = append(testlist2, rotated);
-  list_print(append4);
+  list_t test = filter_odd(testlist);
+  list_print(test);
   cout << endl;
 
 }
