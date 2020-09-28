@@ -5,7 +5,7 @@
 using namespace std;
 
 bool ListEqual(list_t l1, list_t l2)
-    // EFFECTS: reeturns true of l1 and l2 are equal, false otherwise
+    // EFFECTS: returns true if l1 and l2 are equal, false otherwise
 {
     // If either are empty, both must be empty for equality
     if (list_isEmpty(l1) || list_isEmpty(l2)) {
@@ -44,17 +44,16 @@ int main() {
 
   list_print(rotated);
   list_print(testlist);
+  list_t testlist2 = list_make();
+  for(int i = 0; i < 4; i++) {
+    testlist2 = list_make(i, testlist2);
+  }
+  list_print(testlist2);
+  cout << endl;
 
-  //testing sum
-  int sum1 = sum(rotated);
-  cout << endl << sum1 << endl;
-  int sum2 = sum(testlist);
-  cout << sum2 << endl; 
+  list_t test = rotate(testlist2, 4);
+  list_print(test);
+  cout << endl;
 
-  //testing product
-  //int product1 = product(rotated);
-  //cout << product1 << endl;
-  //int product2 = product(testlist);
-  //cout << product2 << endl;
 
 }
