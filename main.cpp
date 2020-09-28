@@ -51,7 +51,7 @@ int main() {
   list_print(testlist2);
   cout << endl;
 
-  list_t test = filter_odd(testlist);
+  list_t test = filter_even(testlist2);
   list_print(test);
   cout << endl;
 

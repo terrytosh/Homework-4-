@@ -68,6 +68,16 @@ list_t oddHelper(list_t list, list_t output_list) {
   return oddHelper(list_rest(list), output_list);
 }
 
+list_t evenHelper(list_t list, list_t output_list) {
+  if(list_isEmpty(list)) {
+    return reverse(output_list);
+  }
+  if(list_first(list) % 2 == 0) {
+    output_list = list_make(list_first(list), output_list);
+  }
+  return evenHelper(list_rest(list), output_list);
+}
+
 int accumulate(list_t l, int (*fn)(int, int), int base) {
   if (list_isEmpty(l)) {
     return base;
@@ -97,4 +107,9 @@ list_t append(list_t first, list_t second) {
 list_t filter_odd(list_t list) {
   list_t output_list = list_make();
   return oddHelper(list, output_list);
+}
+
+list_t filter_even(list_t list) {
+  list_t output_list = list_make();
+  return evenHelper(list, output_list);
 }
