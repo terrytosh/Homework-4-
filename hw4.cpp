@@ -4,26 +4,73 @@ sum():
 Determine base case, so if the list is empty return
 the sum. If the list is not empty, add the value
 of the first element in the list to sum and then
-recursively call sumHelper(list minus first element, sum)
+recursively call sumHelper(list minus first element, sum).
 
 product():
 Determine base case, so if the list is empty return
 the product. If the list is not empty, multiply the value
 of the first element in the list to product and then
-recursively call productHelper(list minus first element, product)
+recursively call productHelper(list minus first element, product).
 
 accumulate():
+Determine base case, so once the list is empty return the base.
+Else, recursively return accumulate function with the list minus the 
+first element, fn, and fn(base, list_first(l)) which effectively adds the
+base value to the current element.
 
 reverse():
+Once the list is empty, return the output_list. Else, set
+output_list equal to a new list with list_first(list) being the
+first element followed by the elements in output_list. Recursively call
+reverseHelper(list_rest(first), output_list) until list is empty.
 
 append():
+If the first list is not empty, set output_list equal to
+a new list with list_first(first) as the intial element, followed
+by the rest of the contents in output_list. Recursively call 
+appendHelper(list_rest(first), second, output_list) until the
+first list contains no elements.
+Then, if the second list is not empty, set output_list equal to
+a new list with list_first(second) as the intial element, followed
+by the rest of the contents in output_list. Recursively call 
+appendHelper(first, list_rest(second), output_list) until the
+second list contains no elements. Once both list are empty,
+return reverse(output_list).
+
+filter_odd():
+Base case - if the list is empty, return reverse(output_list)
+Else, the list is not empty, if the value at list_first(list)
+% 2 != 0, set output_list equal to a new list with list_first(list)
+as the inital element followed by the contents in output_list. Recursively
+return oddHelper(list_rest(list), output_list) until list has no elements.
+
+filter_even():
+Base case - if the list is empty, return reverse(output_list)
+Else, the list is not empty, if the value at list_first(list)
+% 2 == 0, set output_list equal to a new list with list_first(list)
+as the inital element followed by the contents in output_list. Recursively
+return evenHelper(list_rest(list), output_list) until list has no elements.
+
+filter():
+Base case - if the list is empty, return reverse(output_list)
+Else, the list is not empty, if the value at fn(list_first(list))
+evaluates to true, set output_list equal to a new list with list_first(list)
+as the inital element followed by the contents in output_list. Recursively
+return filterHelper(list_rest(list), fn, output_list) until list has no elements.
+
+rotate():
+Base case - if n == 0, return list. Else, set list equal to a new 
+list with list_first(list) as the initial value followed by the 
+reverse of the rest of the contents in list, then reverse the new list
+just made. Decrement n. Recursively return rotate(list, n) until base
+case conditions met.
 
 */
 #include "recursive.h"
 #include "hw4.h"
 
 static int sumHelper(list_t list, int sum) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return sum;
   }
   sum += list_first(list);
@@ -31,7 +78,7 @@ static int sumHelper(list_t list, int sum) {
 }
 
 static int productHelper(list_t list, int product) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return product;
   }
   product *= list_first(list);
@@ -39,7 +86,7 @@ static int productHelper(list_t list, int product) {
 }
 
 static list_t reverseHelper(list_t list, list_t output_list) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return output_list;
   }
   output_list = list_make(list_first(list), output_list);
@@ -47,42 +94,41 @@ static list_t reverseHelper(list_t list, list_t output_list) {
 }
 
 static list_t appendHelper(list_t first, list_t second, list_t output_list) {
-  if(!list_isEmpty(first)) {
+  if (!list_isEmpty(first)) {
     output_list = list_make(list_first(first), output_list);
     return appendHelper(list_rest(first), second, output_list);
-  }
-  else if(!list_isEmpty(second)) {
-    output_list = list_make(list_first(second), output_list);
-    return appendHelper(first, list_rest(second), output_list);
+  } else if (!list_isEmpty(second)) {
+      output_list = list_make(list_first(second), output_list);
+      return appendHelper(first, list_rest(second), output_list);
   }
   return reverse(output_list);
 }
 
 static list_t oddHelper(list_t list, list_t output_list) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return reverse(output_list);
   }
-  if(list_first(list) % 2 != 0) {
+  if (list_first(list) % 2 != 0) {
     output_list = list_make(list_first(list), output_list);
   }
   return oddHelper(list_rest(list), output_list);
 }
 
 static list_t evenHelper(list_t list, list_t output_list) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return reverse(output_list);
   }
-  if(list_first(list) % 2 == 0) {
+  if (list_first(list) % 2 == 0) {
     output_list = list_make(list_first(list), output_list);
   }
   return evenHelper(list_rest(list), output_list);
 }
 
 static list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
-  if(list_isEmpty(list)) {
+  if (list_isEmpty(list)) {
     return reverse(output_list);
   }
-  if(fn(list_first(list))) {
+  if (fn(list_first(list))) {
     output_list = list_make(list_first(list), output_list);
   }
   return filterHelper(list_rest(list), fn, output_list);
