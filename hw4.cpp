@@ -121,7 +121,7 @@ list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
   if(fn(list_first(list))) {
     output_list = list_make(list_first(list), output_list);
   }
-  return filterHelper(list, fn, output_list);
+  return filterHelper(list_rest(list), fn, output_list);
 }
 
 list_t filter(list_t list, bool (*fn)(int)) {
