@@ -5,7 +5,7 @@
 using namespace std;
 
 bool ListEqual(list_t l1, list_t l2)
-    // EFFECTS: reeturns true of l1 and l2 are equal, false otherwise
+    // EFFECTS: returns true if l1 and l2 are equal, false otherwise
 {
     // If either are empty, both must be empty for equality
     if (list_isEmpty(l1) || list_isEmpty(l2)) {
@@ -44,29 +44,29 @@ int main() {
 
   list_print(rotated);
   list_print(testlist);
-
-  //testing sum
-  int sum1 = sum(rotated);
-  cout << endl << sum1 << endl;
-  int sum2 = sum(testlist);
-  cout << sum2 << endl; 
-
-  //testing product
-  //int product1 = product(rotated);
-  //cout << product1 << endl;
-  //int product2 = product(testlist);
-  //cout << product2 << endl;
-
-  list_t reversed = reverse(rotated);
-  list_print(reversed);
   cout << endl;
 
-  list_t appended = append(rotated, reversed);
-  list_print(appended);
+  list_t append1 = append(rotated, testlist);
+  list_print(append1);
   cout << endl;
 
-  list_t test = list_make();
-  list_t append2 = append(rotated, test);
+  list_t append2 = append(testlist, rotated);
   list_print(append2);
+  cout << endl;
+
+  list_t testlist2 = list_make();
+  for(int i = 0; i < 4; i++) {
+    testlist2 = list_make(i, testlist2);
+  }
+  list_print(testlist2);
+  cout << endl;
+
+  list_t append3 = append(rotated, testlist2);
+  list_print(append3);
+  cout << endl;
+
+  list_t append4 = append(testlist2, rotated);
+  list_print(append4);
+  cout << endl;
 
 }
