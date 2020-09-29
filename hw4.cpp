@@ -86,9 +86,15 @@ reversing the list again, gives us the list in the correct orientation.
 Decrement n. Recursively return chop().
 
 fib():
+Base case - if n == 0, return 0.
+Base case - if n == 1, return 1.
+Else, return the sum of fib(n-1)
+and fib(n-2).
 
 fib_tail():
-
+Base case - if n == 0, return 0.
+if n == 1, return j. Else, recursively 
+call fibHelper(n-1, j, i+j).
 */
 #include <iostream>
 #include "recursive.h"
@@ -176,6 +182,16 @@ static list_t insertHelper(list_t first, list_t second, list_t output_list, unsi
   return reverse(output_list);
 }
 
+int fibHelper(int n, int i = 0, int j = 1) { 
+  if (n == 0) {
+    return 0;
+  } 
+  if (n == 1) {
+    return j; 
+  }
+  return fibHelper(n - 1, j, i + j); 
+}
+
 int accumulate(list_t l, int (*fn)(int, int), int base) {
   if (list_isEmpty(l)) {
     return base;
@@ -248,17 +264,6 @@ int fib(int n) {
     return 1;
   }
   return fib(n-1) + fib(n-2);
-}
-
-int fibHelper(int n, int i = 0, int j = 1) 
-{ 
-  if (n == 0) {
-    return i;
-  } 
-  if (n == 1) {
-    return j; 
-  }
-  return fibHelper(n - 1, j, i + j); 
 }
 
 int fib_tail(int n) {
