@@ -225,3 +225,18 @@ int fib(int n) {
   }
   return fib(n-1) + fib(n-2);
 }
+
+int fibHelper(int n, int i = 0, int j = 1) 
+{ 
+  if (n == 0) {
+    return i;
+  } 
+  if (n == 1) {
+    return j; 
+  }
+  return fibHelper(n - 1, j, i + j); 
+}
+
+int fib_tail(int n) {
+  return fibHelper(n, 0);
+}

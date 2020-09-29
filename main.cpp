@@ -56,5 +56,6 @@ int main() {
   cout << endl;
 
   cout << fib(6) << endl;
+  cout << fib_tail(6) << endl;
 
 }
