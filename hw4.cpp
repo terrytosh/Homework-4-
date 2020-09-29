@@ -65,6 +65,30 @@ reverse of the rest of the contents in list, then reverse the new list
 just made. Decrement n. Recursively return rotate(list, n) until base
 case conditions met.
 
+insert_list():
+If n =! 0 then set output_list equal to list_first(first) as
+the first element followed by the rest of the elements in
+output_list. Decrement n. Recursively return insertHelper.
+If the second list is not empty && n == 0, then set output_list
+equal to the first element in the second list, followed by the
+rest of the elements in output_list. Recursively return insertHelper.
+Else if the first list is not empty && n == 0, set output_list equal
+to the first element in first, followed by the rest of the elements
+in output_list. Recursively return insertHelper(). Then return 
+reverse(output_list).
+
+chop():
+Base case - if n == 0 return the list.
+Else, set the list equal to the reverse(list_rest(reverse(l))).
+list_rest(reverse(l)) will reverse the given list, then remove
+the first element, effectively removing the "last" element. Then,
+reversing the list again, gives us the list in the correct orientation.
+Decrement n. Recursively return chop().
+
+fib():
+
+fib_tail():
+
 */
 #include <iostream>
 #include "recursive.h"
@@ -137,6 +161,21 @@ static list_t filterHelper(list_t list, bool (*fn)(int), list_t output_list) {
   return filterHelper(list_rest(list), fn, output_list);
 }
 
+static list_t insertHelper(list_t first, list_t second, list_t output_list, unsigned int n) {
+  if (n != 0) {
+    output_list = list_make(list_first(first), output_list);
+    n--;
+    return insertHelper(list_rest(first), second, output_list, n);
+  } else if (!list_isEmpty(second) && n == 0) {
+      output_list = list_make(list_first(second), output_list);
+      return insertHelper(first, list_rest(second), output_list, n);
+  } else if(!list_isEmpty(first) && n == 0) {
+    output_list = list_make(list_first(first), output_list);
+    return insertHelper(list_rest(first), second, output_list, n);
+  }
+  return reverse(output_list);
+}
+
 int accumulate(list_t l, int (*fn)(int, int), int base) {
   if (list_isEmpty(l)) {
     return base;
@@ -185,21 +224,6 @@ list_t rotate(list_t list, unsigned int n) {
   list = reverse(list_make(list_first(list), reverse(list_rest(list))));
   n--;
   return rotate(list, n);
-}
-
-static list_t insertHelper(list_t first, list_t second, list_t output_list, unsigned int n) {
-  if (n != 0) {
-    output_list = list_make(list_first(first), output_list);
-    n--;
-    return insertHelper(list_rest(first), second, output_list, n);
-  } else if (!list_isEmpty(second) && n == 0) {
-      output_list = list_make(list_first(second), output_list);
-      return insertHelper(first, list_rest(second), output_list, n);
-  } else if(!list_isEmpty(first) && n == 0) {
-    output_list = list_make(list_first(first), output_list);
-    return insertHelper(list_rest(first), second, output_list, n);
-  }
-  return reverse(output_list);
 }
 
 list_t insert_list(list_t first, list_t second, unsigned int n) {
