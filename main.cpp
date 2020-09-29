@@ -55,5 +55,6 @@ int main() {
   list_print(test);
   cout << endl;
 
+  cout << fib(6) << endl;
 
 }
