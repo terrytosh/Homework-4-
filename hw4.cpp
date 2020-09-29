@@ -66,8 +66,11 @@ just made. Decrement n. Recursively return rotate(list, n) until base
 case conditions met.
 
 */
+#include <iostream>
 #include "recursive.h"
 #include "hw4.h"
+
+using namespace std;
 
 static int sumHelper(list_t list, int sum) {
   if (list_isEmpty(list)) {
@@ -182,4 +185,24 @@ list_t rotate(list_t list, unsigned int n) {
   list = reverse(list_make(list_first(list), reverse(list_rest(list))));
   n--;
   return rotate(list, n);
+}
+
+static list_t insertHelper(list_t first, list_t second, list_t output_list, unsigned int n) {
+  if (n != 0) {
+    output_list = list_make(list_first(first), output_list);
+    n--;
+    return insertHelper(list_rest(first), second, output_list, n);
+  } else if (!list_isEmpty(second) && n == 0) {
+      output_list = list_make(list_first(second), output_list);
+      return insertHelper(first, list_rest(second), output_list, n);
+  } else if(!list_isEmpty(first) && n == 0) {
+    output_list = list_make(list_first(first), output_list);
+    return insertHelper(list_rest(first), second, output_list, n);
+  }
+  return reverse(output_list);
+}
+
+list_t insert_list(list_t first, list_t second, unsigned int n) {
+  list_t output_list = list_make();
+  return insertHelper(first, second, output_list, n);
 }
