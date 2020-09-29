@@ -51,7 +51,7 @@ int main() {
   list_print(testlist2);
   cout << endl;
 
-  list_t test = insert_list(rotated, testlist2, 2);
+  list_t test = chop(testlist2, 2);
   list_print(test);
   cout << endl;
 

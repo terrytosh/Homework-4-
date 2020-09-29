@@ -206,3 +206,12 @@ list_t insert_list(list_t first, list_t second, unsigned int n) {
   list_t output_list = list_make();
   return insertHelper(first, second, output_list, n);
 }
+
+list_t chop(list_t l, unsigned int n) {
+  if (n == 0) {
+    return l;
+  }
+  l = reverse(list_rest(reverse(l)));
+  n--;
+  return chop(l, n);
+}
